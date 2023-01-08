@@ -1,0 +1,6 @@
+{
+    "name": "timur/package",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
