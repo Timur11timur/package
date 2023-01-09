@@ -6,6 +6,11 @@ class Transcription
 {
     private array $lines;
 
+    public function __construct(array $lines)
+    {
+        $this->lines = $this->discardInvalidLines(array_map('trim', $lines));
+    }
+
     public function __toString(): string
     {
         return implode("", $this->lines);
@@ -13,11 +18,7 @@ class Transcription
 
     public static function load(string $path): self
     {
-        $instance = new static();
-
-        $instance->lines = $instance->discardInvalidLines(file($path));
-
-        return $instance;
+        return new static(file($path));
     }
 
     public function lines(): array
@@ -32,8 +33,6 @@ class Transcription
 
     private function discardInvalidLines(array $lines): array
     {
-        $lines = array_map('trim', $lines);
-
         return array_values(array_filter($lines, function ($line) {
             return Line::valid($line);
         }));
