@@ -3,6 +3,7 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
+use Timur\Package\Line;
 use Timur\Package\Transcription;
 
 class TranscriptionTest extends TestCase
@@ -19,11 +20,15 @@ class TranscriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_convert_to_an_array_of_lines()
+    public function it_can_convert_to_an_array_of_line_objects()
     {
         $file = __DIR__ . '/stubs/base-example.vtt';
 
-        $this->assertCount(4, Transcription::load($file)->lines());
+        $lines = Transcription::load($file)->lines();
+
+        $this->assertCount(2, $lines);
+
+        $this->assertContainsOnlyInstancesOf(Line::class, $lines);
     }
 
     /** @test */
@@ -34,6 +39,6 @@ class TranscriptionTest extends TestCase
         $transcription = Transcription::load($file);
 
         $this->assertStringNotContainsString('WEBVTT', $transcription);
-        $this->assertCount(4, $transcription->lines());
+        $this->assertCount(2, $transcription->lines());
     }
 }
