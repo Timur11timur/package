@@ -13,7 +13,7 @@ class Transcription
 
     public function __toString(): string
     {
-        return implode("", $this->lines);
+        return implode("\n", $this->lines);
     }
 
     public static function load(string $path): self
@@ -29,6 +29,13 @@ class Transcription
         }
 
         return $result;
+    }
+
+    public function htmlLines(): string
+    {
+        return implode("\n", array_map(function (Line $line) {
+            return $line->toAnchorTag();
+        }, $this->lines()));
     }
 
     private function discardInvalidLines(array $lines): array
