@@ -3,6 +3,7 @@
 namespace Tests;
 
 use ArrayAccess;
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Fralik\Package\Line;
 use Fralik\Package\Transcription;
@@ -41,7 +42,7 @@ class TranscriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_renders_the_line_as_html()
+    public function it_renders_lines_as_html()
     {
         $expected = <<<EOT
             <a href="?time=00:01">Here is an</a>
@@ -56,5 +57,12 @@ class TranscriptionTest extends TestCase
     {
         $this->assertInstanceOf(ArrayAccess::class, $this->transcription->lines());
         $this->assertInstanceOf(Line::class, $this->transcription->lines()[0]);
+    }
+
+    /** @test */
+    public function it_can_be_rendered_as_json()
+    {
+        $this->assertInstanceOf(JsonSerializable::class, $this->transcription->lines());
+        $this->assertJson(json_encode($this->transcription->lines()));
     }
 }
