@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use ArrayAccess;
 use PHPUnit\Framework\TestCase;
 use Fralik\Package\Line;
 use Fralik\Package\Transcription;
@@ -48,5 +49,12 @@ class TranscriptionTest extends TestCase
             EOT;
 
         $this->assertEquals($expected, $this->transcription->lines()->asHtml());
+    }
+
+    /** @test */
+    public function it_is_accessible_like_an_array()
+    {
+        $this->assertInstanceOf(ArrayAccess::class, $this->transcription->lines());
+        $this->assertInstanceOf(Line::class, $this->transcription->lines()[0]);
     }
 }

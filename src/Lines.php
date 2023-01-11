@@ -2,12 +2,13 @@
 
 namespace Fralik\Package;
 
+use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use Traversable;
 
-class Lines implements Countable, IteratorAggregate
+class Lines implements Countable, IteratorAggregate, ArrayAccess
 {
     private array $lines;
 
@@ -38,5 +39,29 @@ class Lines implements Countable, IteratorAggregate
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->lines);
+    }
+
+    public function offsetExists(mixed $key): bool
+    {
+        return isset($this->lines[$key]);
+    }
+
+    public function offsetGet(mixed $key): mixed
+    {
+        return $this->lines[$key];
+    }
+
+    public function offsetSet(mixed $key, mixed $value): void
+    {
+        if (is_null($key)) {
+            $this->lines[] = $value;
+        } else {
+            $this->lines[$key] = $value;
+        }
+    }
+
+    public function offsetUnset(mixed $key): void
+    {
+        unset($this->lines[$key]);
     }
 }
