@@ -4,18 +4,15 @@ namespace Timur\Package;
 
 class Line
 {
+    private int $position;
     private string $timestamp;
     private string $body;
 
-    public function __construct(string $timestamp, string $body)
+    public function __construct(int $position, string $timestamp, string $body)
     {
+        $this->position = $position;
         $this->timestamp = $timestamp;
         $this->body = $body;
-    }
-
-    public static function valid(string $line): bool
-    {
-        return $line !== 'WEBVTT' && $line !== '' && ! is_numeric($line);
     }
 
     public function toAnchorTag(): string
