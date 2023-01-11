@@ -3,7 +3,7 @@
     "description": "Load and parse VTT files.",
     "authors": [
         {
-            "name": "Timur"
+            "name": "Timur Fralik"
         }
     ],
     "require": {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Timur\\Package\\": "src/"
+            "Fralik\\Package\\": "src/"
         }
     }
 }

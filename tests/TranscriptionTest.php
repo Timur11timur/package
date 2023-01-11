@@ -3,8 +3,8 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Timur\Package\Line;
-use Timur\Package\Transcription;
+use Fralik\Package\Line;
+use Fralik\Package\Transcription;
 
 class TranscriptionTest extends TestCase
 {

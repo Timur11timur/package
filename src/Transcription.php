@@ -1,6 +1,6 @@
 <?php
 
-namespace Timur\Package;
+namespace Fralik\Package;
 
 class Transcription
 {
